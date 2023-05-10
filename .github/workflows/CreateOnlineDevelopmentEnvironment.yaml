@@ -39,19 +39,19 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go-Actions/WorkflowInitialize@issue501
+        uses: freddydk/AL-Go-Actions/WorkflowInitialize@issue513
         with:
           shell: powershell
           eventId: "DO0093"
 
       - name: Read settings
-        uses: freddydk/AL-Go-Actions/ReadSettings@issue501
+        uses: freddydk/AL-Go-Actions/ReadSettings@issue513
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
 
       - name: Read secrets
-        uses: freddydk/AL-Go-Actions/ReadSecrets@issue501
+        uses: freddydk/AL-Go-Actions/ReadSecrets@issue513
         env:
           secrets: ${{ toJson(secrets) }}
         with:
@@ -74,7 +74,7 @@ jobs:
             Write-Host "AdminCenterApiCredentials not provided, initiating Device Code flow"
             $ALGoHelperPath = "$([System.IO.Path]::GetTempFileName()).ps1"
             $webClient = New-Object System.Net.WebClient
-            $webClient.DownloadFile('https://raw.githubusercontent.com/freddydk/AL-Go-Actions/issue501/AL-Go-Helper.ps1', $ALGoHelperPath)
+            $webClient.DownloadFile('https://raw.githubusercontent.com/freddydk/AL-Go-Actions/issue513/AL-Go-Helper.ps1', $ALGoHelperPath)
             . $ALGoHelperPath
             $BcContainerHelperPath = DownloadAndImportBcContainerHelper -baseFolder $ENV:GITHUB_WORKSPACE
             $authContext = New-BcAuthContext -includeDeviceLogin -deviceLoginTimeout ([TimeSpan]::FromSeconds(0))
@@ -94,13 +94,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Read settings
-        uses: freddydk/AL-Go-Actions/ReadSettings@issue501
+        uses: freddydk/AL-Go-Actions/ReadSettings@issue513
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialize.outputs.telemetryScopeJson }}
 
       - name: Read secrets
-        uses: freddydk/AL-Go-Actions/ReadSecrets@issue501
+        uses: freddydk/AL-Go-Actions/ReadSecrets@issue513
         env:
           secrets: ${{ toJson(secrets) }}
         with:
@@ -117,7 +117,7 @@ jobs:
           }
 
       - name: Create Development Environment
-        uses: freddydk/AL-Go-Actions/CreateDevelopmentEnvironment@issue501
+        uses: freddydk/AL-Go-Actions/CreateDevelopmentEnvironment@issue513
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ needs.Initialize.outputs.telemetryScopeJson }}
@@ -128,7 +128,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: freddydk/AL-Go-Actions/WorkflowPostProcess@issue501
+        uses: freddydk/AL-Go-Actions/WorkflowPostProcess@issue513
         with:
           shell: powershell
           eventId: "DO0093"

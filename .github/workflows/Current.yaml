@@ -34,21 +34,21 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go-Actions/WorkflowInitialize@issue501
+        uses: freddydk/AL-Go-Actions/WorkflowInitialize@issue513
         with:
           shell: powershell
           eventId: "DO0101"
 
       - name: Read settings
         id: ReadSettings
-        uses: freddydk/AL-Go-Actions/ReadSettings@issue501
+        uses: freddydk/AL-Go-Actions/ReadSettings@issue513
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
           
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: freddydk/AL-Go-Actions/DetermineProjectsToBuild@issue501
+        uses: freddydk/AL-Go-Actions/DetermineProjectsToBuild@issue513
         with:
           shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -82,14 +82,14 @@ jobs:
           path: '${{ github.workspace }}\.dependencies'
 
       - name: Read settings
-        uses: freddydk/AL-Go-Actions/ReadSettings@issue501
+        uses: freddydk/AL-Go-Actions/ReadSettings@issue513
         with:
           shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           project: ${{ matrix.project }}
 
       - name: Read secrets
-        uses: freddydk/AL-Go-Actions/ReadSecrets@issue501
+        uses: freddydk/AL-Go-Actions/ReadSecrets@issue513
         env:
           secrets: ${{ toJson(secrets) }}
         with:
@@ -99,7 +99,7 @@ jobs:
           secrets: 'licenseFileUrl,insiderSasToken,codeSignCertificateUrl,codeSignCertificatePassword,keyVaultCertificateUrl,keyVaultCertificatePassword,keyVaultClientId,gitHubPackagesContext'
 
       - name: Determine ArtifactUrl
-        uses: freddydk/AL-Go-Actions/DetermineArtifactUrl@issue501
+        uses: freddydk/AL-Go-Actions/DetermineArtifactUrl@issue513
         id: determineArtifactUrl
         with:
           shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
@@ -108,7 +108,7 @@ jobs:
           secretsJson: ${{ env.RepoSecrets }}
 
       - name: Run pipeline
-        uses: freddydk/AL-Go-Actions/RunPipeline@issue501
+        uses: freddydk/AL-Go-Actions/RunPipeline@issue513
         env:
           BuildMode: ${{ matrix.buildMode }}
         with:
@@ -122,7 +122,7 @@ jobs:
 
       - name: Calculate Artifact names
         id: calculateArtifactsNames
-        uses: freddydk/AL-Go-Actions/CalculateArtifactNames@issue501
+        uses: freddydk/AL-Go-Actions/CalculateArtifactNames@issue513
         if: success() || failure()
         with:
           shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
@@ -185,7 +185,7 @@ jobs:
       - name: Analyze Test Results
         id: analyzeTestResults
         if: success() || failure()
-        uses: freddydk/AL-Go-Actions/AnalyzeTests@issue501
+        uses: freddydk/AL-Go-Actions/AnalyzeTests@issue513
         with:
           shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
@@ -193,7 +193,7 @@ jobs:
 
       - name: Cleanup
         if: always()
-        uses: freddydk/AL-Go-Actions/PipelineCleanup@issue501
+        uses: freddydk/AL-Go-Actions/PipelineCleanup@issue513
         with:
           shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
@@ -209,7 +209,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: freddydk/AL-Go-Actions/WorkflowPostProcess@issue501
+        uses: freddydk/AL-Go-Actions/WorkflowPostProcess@issue513
         with:
           shell: powershell
           eventId: "DO0101"

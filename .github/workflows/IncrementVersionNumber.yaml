@@ -36,13 +36,13 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go-Actions/WorkflowInitialize@issue501
+        uses: freddydk/AL-Go-Actions/WorkflowInitialize@issue513
         with:
           shell: powershell
           eventId: "DO0096"
 
       - name: Increment Version Number
-        uses: freddydk/AL-Go-Actions/IncrementVersionNumber@issue501
+        uses: freddydk/AL-Go-Actions/IncrementVersionNumber@issue513
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -52,7 +52,7 @@ jobs:
   
       - name: Finalize the workflow
         if: always()
-        uses: freddydk/AL-Go-Actions/WorkflowPostProcess@issue501
+        uses: freddydk/AL-Go-Actions/WorkflowPostProcess@issue513
         with:
           shell: powershell
           eventId: "DO0096"
