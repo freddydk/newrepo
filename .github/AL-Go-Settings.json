@@ -1,5 +1,5 @@
 {
   "type": "PTE",
   "templateUrl": "https://github.com/freddydk/AL-Go-PTE@issue513",
-  "bcContainerHelperVersion": "preview"
+  "bcContainerHelperVersion": "4.0.16"
 }
