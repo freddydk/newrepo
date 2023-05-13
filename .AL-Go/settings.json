@@ -3,9 +3,7 @@
   "appFolders": [],
   "testFolders": [],
   "bcptTestFolders": [],
-  "appDependencyProbingPaths": [
-        {
-            "repo": "SpareBrainedIdeas/Spare-Brained-Licensing"
-        }
-    ]
+  "installApps": [
+    "https://github.com/SpareBrainedIdeas/Spare-Brained-Licensing/releases/download/v2.0.202309.154/Spare.Brained.Ideas.AB_Spare.Brained.Licensing_2.0.202309.154_runtime.app.zip"
+  ]
 }
