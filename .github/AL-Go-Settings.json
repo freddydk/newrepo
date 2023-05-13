@@ -1,4 +1,5 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/freddydk/AL-Go-PTE@issue513"
+  "templateUrl": "https://github.com/freddydk/AL-Go-PTE@issue513",
+  "CICDPullRequestBranches": []
 }
